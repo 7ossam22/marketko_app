@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:marketko_app/view_models/signin_viewmodel.dart';
 
+late String _email;
+late String _password;
+
 // ignore: camel_case_types
 class _welcome_widgetGroup extends StatelessWidget {
   const _welcome_widgetGroup({Key? key}) : super(key: key);
@@ -49,7 +52,7 @@ class _Signin_handlerGroup extends StatefulWidget {
 
 // ignore: camel_case_types
 class _Signin_handlerGroupState extends State<_Signin_handlerGroup> {
-  SignInViewModel _viewModel = SignInViewModel();
+  final SignInViewModel _viewModel = SignInViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +69,11 @@ class _Signin_handlerGroupState extends State<_Signin_handlerGroup> {
           const SizedBox(
             height: 10,
           ),
-          const TextField(
-            decoration: InputDecoration(
+          TextField(
+            onChanged: (val) => setState(() {
+              _email = val;
+            }),
+            decoration: const InputDecoration(
                 border: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Colors.brown,
@@ -85,8 +91,11 @@ class _Signin_handlerGroupState extends State<_Signin_handlerGroup> {
           const SizedBox(
             height: 10,
           ),
-          const TextField(
-            decoration: InputDecoration(
+          TextField(
+            onChanged: (val) => setState(() {
+              _password = val;
+            }),
+            decoration: const InputDecoration(
                 border: OutlineInputBorder(
                     borderSide: BorderSide(
               color: Colors.brown,
@@ -108,7 +117,7 @@ class _Signin_handlerGroupState extends State<_Signin_handlerGroup> {
                       ? TextButton(
                           onPressed: () {
                             _viewModel.onSigninSuccessfully(
-                                'email', 'password', this.context);
+                                _email, _password, this.context);
                           },
                           child: const Text(
                             'Sign in',
@@ -119,10 +128,10 @@ class _Signin_handlerGroupState extends State<_Signin_handlerGroup> {
                             ),
                           ))
                       : const Center(
-                        child: CircularProgressIndicator(
+                          child: CircularProgressIndicator(
                             color: Colors.white,
                           ),
-                      );
+                        );
                 }),
           )
         ],
