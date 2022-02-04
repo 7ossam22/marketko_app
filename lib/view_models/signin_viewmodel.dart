@@ -6,7 +6,7 @@ import 'package:rxdart/rxdart.dart';
 
 class SignInViewModel {
   late String _stateTxt;
-  final ApiImplementation _api = ApiImplementation();
+  final ApiImplementation _api = ApiImplementation().Singleton();
 
   // ignore: non_constant_identifier_names
   final BehaviorSubject<bool> _progress_listener =

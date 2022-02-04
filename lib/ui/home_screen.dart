@@ -1,39 +1,40 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:marketko_app/customwidgets/carousel_widget.dart';
 import 'package:marketko_app/customwidgets/category_widget.dart';
 import 'package:marketko_app/view_models/home_viewmodel.dart';
 
 HomeViewModel _viewModel = HomeViewModel();
 
-class _CustomCarouselWidget extends StatefulWidget {
-  const _CustomCarouselWidget({Key? key}) : super(key: key);
-
-  @override
-  _CustomCarouselWidgetState createState() => _CustomCarouselWidgetState();
-}
-
-class _CustomCarouselWidgetState extends State<_CustomCarouselWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return CarouselSlider(
-      options: CarouselOptions(
-        autoPlay: false,
-        height: 180,
-        enlargeCenterPage: true,
-      ),
-      items: _viewModel.CarouselList.map(
-        (image) => ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Image.network(
-            image,
-            fit: BoxFit.cover,
-            width: 400,
-          ),
-        ),
-      ).toList(),
-    );
-  }
-}
+// class _CustomCarouselWidget extends StatefulWidget {
+//   const _CustomCarouselWidget({Key? key}) : super(key: key);
+//
+//   @override
+//   _CustomCarouselWidgetState createState() => _CustomCarouselWidgetState();
+// }
+//
+// class _CustomCarouselWidgetState extends State<_CustomCarouselWidget> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return CarouselSlider(
+//       options: CarouselOptions(
+//         autoPlay: false,
+//         height: 180,
+//         enlargeCenterPage: true,
+//       ),
+//       items: _viewModel.CarouselList.map(
+//         (image) => ClipRRect(
+//           borderRadius: BorderRadius.circular(10),
+//           child: Image.network(
+//             image,
+//             fit: BoxFit.cover,
+//             width: 400,
+//           ),
+//         ),
+//       ).toList(),
+//     );
+//   }
+// }
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -48,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // TODO: implement initState
     super.initState();
     _viewModel.onGettingCategoryList();
+    _viewModel.onGettingCarouselList();
   }
 
   @override
@@ -94,7 +96,16 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const _CustomCarouselWidget(),
+            StreamBuilder<List>(
+                stream: _viewModel.carouselList,
+                builder: (context, snapshot) => (snapshot.data ?? []).isEmpty
+                    ? const SizedBox(
+                        height: 180,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : CustomCarouselWidget(list: snapshot.data!)),
             const Padding(
               padding: EdgeInsets.fromLTRB(20, 15, 0, 0),
               child: Text(

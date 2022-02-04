@@ -7,4 +7,5 @@ abstract class ApiInterface {
       String username, String email, String password);
 
   Future<List> getCategoriesList();
+  Future<List> getCarouselList();
 }
