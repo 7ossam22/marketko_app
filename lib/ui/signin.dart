@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:marketko_app/view_models/signin_viewmodel.dart';
 
-late String _email;
-late String _password;
+String _email = '';
+String _password = '';
 
 // ignore: camel_case_types
 class _welcome_widgetGroup extends StatelessWidget {
@@ -12,8 +13,10 @@ class _welcome_widgetGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Stack(alignment: Alignment.centerLeft, children: [
-        Image.network(
-            'https://images.unsplash.com/photo-1499233983070-99a5f004e720?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'),
+        Image.asset(
+          'assets/images/fireworks.jpg',
+          fit: BoxFit.cover,
+        ),
         Padding(
           padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
           child: Column(

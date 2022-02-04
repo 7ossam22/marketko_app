@@ -5,6 +5,7 @@ import 'package:marketko_app/api/api_interface.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SignInViewModel {
+  late String _stateTxt;
   final ApiImplementation _api = ApiImplementation();
 
   // ignore: non_constant_identifier_names
@@ -17,12 +18,17 @@ class SignInViewModel {
   Future<void> onSigninSuccessfully(
       String email, String password, BuildContext context) async {
     _progress_listener.add(true);
-    ApiState _state = await _api.signInWithCredentials(email, password);
-    if (_state.name == 'successful') {
-      Navigator.popAndPushNamed(context, 'home');
+    if (email == '' && password == '') {
+      _stateTxt = 'Fill the blanks';
+    } else {
+      ApiState _state = await _api.signInWithCredentials(email, password);
+      if (_state.name == 'successful') {
+        Navigator.popAndPushNamed(context, 'home');
+      }
+      _stateTxt = _state.name;
     }
     Fluttertoast.showToast(
-      msg: 'Sign in ${_state.name}',
+      msg: _stateTxt,
       fontSize: 13,
       backgroundColor: Colors.grey[200],
       toastLength: Toast.LENGTH_SHORT,
@@ -30,5 +36,13 @@ class SignInViewModel {
       textColor: Colors.grey[900],
     );
     _progress_listener.add(false);
+  }
+
+  void onSignUpClicked() {
+    //ToDo ---> implement navigation to sign up screen
+  }
+
+  void onForgotPasswordClicked() {
+    //ToDo ---> implement navigation to forgot password screen
   }
 }
