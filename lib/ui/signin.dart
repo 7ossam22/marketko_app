@@ -95,6 +95,7 @@ class _Signin_handlerGroupState extends State<_Signin_handlerGroup> {
             height: 10,
           ),
           TextField(
+            obscureText: true,
             onChanged: (val) => setState(() {
               _password = val;
             }),

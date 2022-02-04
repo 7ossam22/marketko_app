@@ -44,6 +44,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _viewModel.onGettingCategoryList();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -55,7 +62,9 @@ class _HomeScreenState extends State<HomeScreen> {
             decoration: InputDecoration(
               hintText: 'Search.......',
               border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.brown,),
+                borderSide: BorderSide(
+                  color: Colors.brown,
+                ),
               ),
             ),
           ),
@@ -112,12 +121,25 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(
               height: 550,
-              child: GridView.count(
-                crossAxisCount: 2,
-                children: _viewModel.CategoryList.map(
-                        (category) => CategoryTemplate(category, category.name))
-                    .toList(),
-              ),
+              child: StreamBuilder<List>(
+                  stream: _viewModel.catList,
+                  builder: (context, snapshot) {
+                    return AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 200),
+                      child: (snapshot.data ?? []).isEmpty
+                          ? const Center(
+                              child: CircularProgressIndicator(),
+                            )
+                          : GridView.count(
+                              crossAxisCount: 2,
+                              children: snapshot.data!
+                                  .map((category) => CategoryTemplate(
+                                      category: category,
+                                      onClick: category.name))
+                                  .toList(),
+                            ),
+                    );
+                  }),
             ),
             const SizedBox(),
           ],

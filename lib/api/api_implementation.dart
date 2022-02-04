@@ -1,10 +1,14 @@
+import 'package:marketko_app/stubs/stub_data.dart';
+
 import 'api_interface.dart';
 
 class ApiImplementation extends ApiInterface {
+
   @override
   Future<List> getCategoriesList() async {
-    // TODO: implement getCategoriesList
-    throw UnimplementedError();
+    final Stubs stubs = Stubs();
+    List _catList = stubs.CategoryList;
+    return _catList;
   }
 
   @override

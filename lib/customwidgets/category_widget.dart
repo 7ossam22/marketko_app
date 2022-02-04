@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:marketko_app/models/categorymodel.dart';
 
-// ignore: non_constant_identifier_names
-Widget CategoryTemplate(Category category, String onClick) => Padding(
+class CategoryTemplate extends StatelessWidget {
+  final Category category;
+  final String onClick;
+  const CategoryTemplate({Key? key,required this.category,required this.onClick}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
       child: SizedBox(
         child: Center(
@@ -41,3 +47,6 @@ Widget CategoryTemplate(Category category, String onClick) => Padding(
         ),
       ),
     );
+
+  }
+}
