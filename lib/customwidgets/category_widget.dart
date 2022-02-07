@@ -3,8 +3,8 @@ import 'package:marketko_app/models/categorymodel.dart';
 
 class CategoryTemplate extends StatelessWidget {
   final Category category;
-  final String onClick;
-  const CategoryTemplate({Key? key,required this.category,required this.onClick}) : super(key: key);
+
+  const CategoryTemplate({Key? key, required this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class CategoryTemplate extends StatelessWidget {
         child: Center(
           child: InkWell(
             onTap: () {
-              print('category : ${onClick}');
+              Navigator.pushNamed(context, 'products',arguments: category);
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -47,6 +47,5 @@ class CategoryTemplate extends StatelessWidget {
         ),
       ),
     );
-
   }
 }

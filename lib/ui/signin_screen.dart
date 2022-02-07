@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:marketko_app/view_models/signin_viewmodel.dart';
 
 String _email = '';
@@ -202,6 +203,15 @@ class SignIn_Screen extends StatefulWidget {
 
 // ignore: camel_case_types
 class _SignIn_ScreenState extends State<SignIn_Screen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

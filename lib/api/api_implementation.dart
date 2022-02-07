@@ -1,8 +1,11 @@
+// ignore_for_file: avoid_renaming_method_parameters, non_constant_identifier_names
+
+import 'package:marketko_app/models/productmodel.dart';
 import 'package:marketko_app/stubs/stub_data.dart';
+
 import 'api_interface.dart';
 
 class ApiImplementation extends ApiInterface {
-  // ignore: non_constant_identifier_names
   ApiImplementation Singleton() {
     ApiImplementation? _instance;
     _instance ??= ApiImplementation();
@@ -41,5 +44,18 @@ class ApiImplementation extends ApiInterface {
     await Future.delayed(const Duration(milliseconds: 5000));
     List carouselList = stubs.CarouselList;
     return carouselList;
+  }
+
+  @override
+  Future<Product> getProductItemDetails(String productID) {
+    // TODO: implement getProductItemDetails
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List> getProductsList() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    List productsList = stubs.ProductList;
+    return productsList;
   }
 }

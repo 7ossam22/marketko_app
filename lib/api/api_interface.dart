@@ -1,3 +1,5 @@
+import 'package:marketko_app/models/productmodel.dart';
+
 enum ApiState { failed, successful, error }
 
 abstract class ApiInterface {
@@ -7,5 +9,10 @@ abstract class ApiInterface {
       String username, String email, String password);
 
   Future<List> getCategoriesList();
+
   Future<List> getCarouselList();
+
+  Future<List> getProductsList();
+
+  Future<Product> getProductItemDetails(String product);
 }

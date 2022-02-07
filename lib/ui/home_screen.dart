@@ -1,40 +1,10 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:marketko_app/customwidgets/carousel_widget.dart';
 import 'package:marketko_app/customwidgets/category_widget.dart';
 import 'package:marketko_app/view_models/home_viewmodel.dart';
 
 HomeViewModel _viewModel = HomeViewModel();
-
-// class _CustomCarouselWidget extends StatefulWidget {
-//   const _CustomCarouselWidget({Key? key}) : super(key: key);
-//
-//   @override
-//   _CustomCarouselWidgetState createState() => _CustomCarouselWidgetState();
-// }
-//
-// class _CustomCarouselWidgetState extends State<_CustomCarouselWidget> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return CarouselSlider(
-//       options: CarouselOptions(
-//         autoPlay: false,
-//         height: 180,
-//         enlargeCenterPage: true,
-//       ),
-//       items: _viewModel.CarouselList.map(
-//         (image) => ClipRRect(
-//           borderRadius: BorderRadius.circular(10),
-//           child: Image.network(
-//             image,
-//             fit: BoxFit.cover,
-//             width: 400,
-//           ),
-//         ),
-//       ).toList(),
-//     );
-//   }
-// }
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -48,6 +18,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
     _viewModel.onGettingCategoryList();
     _viewModel.onGettingCarouselList();
   }
@@ -145,8 +119,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisCount: 2,
                               children: snapshot.data!
                                   .map((category) => CategoryTemplate(
-                                      category: category,
-                                      onClick: category.name))
+                                        category: category,
+                                      ))
                                   .toList(),
                             ),
                     );
