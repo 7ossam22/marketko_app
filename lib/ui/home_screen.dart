@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:marketko_app/customwidgets/carousel_widget.dart';
-import 'package:marketko_app/customwidgets/category_widget.dart';
+import 'package:marketko_app/customwidgets/carouselList_widget.dart';
+import 'package:marketko_app/customwidgets/categoriesTemplate_widget.dart';
 import 'package:marketko_app/view_models/home_viewmodel.dart';
 
 HomeViewModel _viewModel = HomeViewModel();
@@ -30,13 +30,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 70,
         elevation: 0,
         backgroundColor: Colors.transparent,
         title: const SizedBox(
+          height: 40,
           child: TextField(
             decoration: InputDecoration(
+              alignLabelWithHint: true,
+              suffixIcon: Icon(Icons.search),
               hintText: 'Search.......',
+              contentPadding: EdgeInsets.all(10),
               border: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.brown,
@@ -54,16 +57,14 @@ class _HomeScreenState extends State<HomeScreen> {
               size: 30,
             )),
         actions: [
-          Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Colors.brown,
-                ),
-                iconSize: 30,
-                onPressed: () {},
-              )),
+          IconButton(
+            icon: const Icon(
+              Icons.shopping_cart_outlined,
+              color: Colors.brown,
+              size: 30,
+            ),
+            onPressed: () {},
+          ),
         ],
       ),
       body: SingleChildScrollView(

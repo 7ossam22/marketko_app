@@ -56,7 +56,6 @@ class _Signin_handlerGroup extends StatefulWidget {
 // ignore: camel_case_types
 class _Signin_handlerGroupState extends State<_Signin_handlerGroup> {
   final SignInViewModel _viewModel = SignInViewModel();
-
   @override
   Widget build(BuildContext context) {
     return Padding(

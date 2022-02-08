@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:marketko_app/customwidgets/product_item.dart';
+import 'package:marketko_app/customwidgets/productItem_widget.dart';
 import 'package:marketko_app/models/categorymodel.dart';
 import 'package:marketko_app/view_models/productlist_viewmodel.dart';
 
@@ -51,7 +51,8 @@ class _ProductScreenState extends State<ProductScreen> {
           ),
         ],
       ),
-      body: Column(
+      body: Flex(
+        direction: Axis.vertical,
         children: [
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 10, 0),
@@ -99,17 +100,18 @@ class _ProductScreenState extends State<ProductScreen> {
                       color: Colors.brown,
                     ),
                   ))
-                : SizedBox(
-                    height: 750,
-                    child: GridView.count(
-                      crossAxisSpacing: 10,
-                      padding: const EdgeInsets.fromLTRB(20, 2, 20, 0),
-                      crossAxisCount: 2,
-                      children: snapshot.data!
-                          .map((product) => ProductItem(product: product))
-                          .toList(),
-                    ),
+                : Expanded(
+                  child: GridView.count(
+                    scrollDirection: Axis.vertical,
+                    crossAxisSpacing: 10,
+                    padding: const EdgeInsets.fromLTRB(20, 2, 20, 0),
+                    crossAxisCount: 2,
+                    childAspectRatio: 1/2,
+                    children: snapshot.data!
+                        .map((product) => ProductItem(product: product))
+                        .toList(),
                   ),
+                ),
           ),
         ],
       ),
