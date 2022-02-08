@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:marketko_app/customwidgets/carouselList_widget.dart';
@@ -67,69 +68,70 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            StreamBuilder<List>(
-                stream: _viewModel.carouselList,
-                builder: (context, snapshot) => (snapshot.data ?? []).isEmpty
-                    ? const SizedBox(
-                        height: 180,
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      )
-                    : CustomCarouselWidget(list: snapshot.data!)),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 15, 0, 0),
-              child: Text(
-                'Categories',
-                style: TextStyle(
-                  color: Colors.brown,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
+      body: Flex(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        direction: Axis.vertical,
+        children: [
+          StreamBuilder<List>(
+              stream: _viewModel.carouselList,
+              builder: (context, snapshot) => (snapshot.data ?? []).isEmpty
+                  ? const SizedBox(
+                      height: 180,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    )
+                  : CustomCarouselWidget(list: snapshot.data!)),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(20, 15, 0, 0),
+            child: Text(
+              'Categories',
+              style: TextStyle(
+                color: Colors.brown,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(160, 0, 160, 0),
+            child: Container(
               height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(160, 0, 160, 0),
-              child: Container(
-                height: 10,
-                decoration: BoxDecoration(
-                  color: Colors.brown,
-                  borderRadius: BorderRadius.circular(50),
-                ),
+              decoration: BoxDecoration(
+                color: Colors.brown,
+                borderRadius: BorderRadius.circular(50),
               ),
             ),
-            SizedBox(
-              height: 550,
-              child: StreamBuilder<List>(
-                  stream: _viewModel.catList,
-                  builder: (context, snapshot) {
-                    return AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 200),
-                      child: (snapshot.data ?? []).isEmpty
-                          ? const Center(
-                              child: CircularProgressIndicator(),
-                            )
-                          : GridView.count(
-                              crossAxisCount: 2,
-                              children: snapshot.data!
-                                  .map((category) => CategoryTemplate(
-                                        category: category,
-                                      ))
-                                  .toList(),
-                            ),
-                    );
-                  }),
-            ),
-            const SizedBox(),
-          ],
-        ),
+          ),
+          Expanded(
+            child: StreamBuilder<List>(
+                stream: _viewModel.catList,
+                builder: (context, snapshot) {
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    child: (snapshot.data ?? []).isEmpty
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : GridView.count(
+                      childAspectRatio: 1/1.2,
+                            padding:const EdgeInsets.all(20.0),
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 20,
+                            crossAxisCount: 2,
+                            children: snapshot.data!
+                                .map((category) => CategoryTemplate(
+                                      category: category,
+                                    ))
+                                .toList(),
+                          ),
+                  );
+                }),
+          ),
+        ],
       ),
     );
   }

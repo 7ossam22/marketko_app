@@ -53,30 +53,43 @@ class Stubs {
           'https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1935&q=80',
     ),
     Product(
-      id: '1',
-      name: 'Wireless Headphone "Beats"',
+      id: '2',
+      name: 'Honor Watch Magic 2 46mm, Charcoal Black',
       category: 'Electronics',
       description:
-          'Wireless headphones,working with bluetooth in area of 10 meters away,long battery lasting for almost 8 hours continuously',
-      price: 150.0,
+          'Watch Dial Diameter: 46mmWatch Dial Material: Metal (Stainless Steel)Shell Material: Metal + PlasticScreen Size: 1.39-inch AMOLED color screen',
+      price:  83.58,
       rate: 4.5,
-      seller: 'IBeats',
+      seller: 'Amazon',
       stock: 43,
       imageUrl:
-          'https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1935&q=80',
+          'https://m.media-amazon.com/images/I/51GOp-TgUWL._AC_.jpg',
     ),
     Product(
-      id: '1',
-      name: 'Wireless Headphone "Beats"',
+      id: '3',
+      name: 'Dell 15au-7500nx laptop',
       category: 'Electronics',
       description:
-          'Wireless headphones,working with bluetooth in area of 10 meters away,long battery lasting for almost 8 hours continuously',
-      price: 150.0,
+          'Dell laptop with 16 Giga ram, 1TB HDD Disk drive and 256 GB SSD, Nvidia GeForce RTX 2080 6GB DDR5 graphics card, LED 21 inch screen with 1920*1080 resolution',
+      price: 735.50,
       rate: 4.5,
-      seller: 'IBeats',
-      stock: 43,
+      seller: 'Gamer Lap',
+      stock: 10,
       imageUrl:
-          'https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1935&q=80',
+          'https://images.unsplash.com/photo-1554246247-6993b606e8b9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    ),
+    Product(
+      id: '4',
+      name: 'Sony AirPods',
+      category: 'Electronics',
+      description:
+      'Spatial audio with dynamic head tracking places sound all around you,Adaptive EQ automatically tunes music to your ears,All-new contoured design,Up to 6 hours of listening time with one charge,Up to 30 hours total listening time with the MagSafe Charging Case',
+      price: 100.0,
+      rate: 4.5,
+      seller: 'MobiOnline_egy',
+      stock: 70,
+      imageUrl:
+      'https://images.unsplash.com/photo-1631176093617-63490a3d785a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80',
     ),
   ];
 }

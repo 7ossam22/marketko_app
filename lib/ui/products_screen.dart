@@ -6,6 +6,9 @@ import 'package:marketko_app/view_models/productlist_viewmodel.dart';
 
 final ProductScreenViewModel _viewModel = ProductScreenViewModel();
 
+// Searchbar query value
+String query = '';
+
 class ProductScreen extends StatefulWidget {
   const ProductScreen({Key? key}) : super(key: key);
 
@@ -32,11 +35,23 @@ class _ProductScreenState extends State<ProductScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.brown),
-        title: Text(
-          _args.name,
-          style: const TextStyle(
-            color: Colors.brown,
-            fontWeight: FontWeight.bold,
+        title: SizedBox(
+          height: 40,
+          child: TextField(
+            onChanged: (val) => setState(() {
+              val.isEmpty ? query = _args.name : query = val;
+            }),
+            decoration: const InputDecoration(
+              alignLabelWithHint: true,
+              suffixIcon: Icon(Icons.search),
+              hintText: 'Search.......',
+              contentPadding: EdgeInsets.all(10),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.brown,
+                ),
+              ),
+            ),
           ),
         ),
         centerTitle: true,
@@ -47,7 +62,9 @@ class _ProductScreenState extends State<ProductScreen> {
               size: 30,
               color: Colors.brown,
             ),
-            onPressed: () {},
+            onPressed: () {
+              //ToDo --> implement navigation to cart screen,
+            },
           ),
         ],
       ),
@@ -69,7 +86,9 @@ class _ProductScreenState extends State<ProductScreen> {
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        //ToDo --> implement Sorting menu,
+                      },
                       icon: const Icon(
                         Icons.sort,
                         color: Colors.brown,
@@ -101,17 +120,18 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                   ))
                 : Expanded(
-                  child: GridView.count(
-                    scrollDirection: Axis.vertical,
-                    crossAxisSpacing: 10,
-                    padding: const EdgeInsets.fromLTRB(20, 2, 20, 0),
-                    crossAxisCount: 2,
-                    childAspectRatio: 1/2,
-                    children: snapshot.data!
-                        .map((product) => ProductItem(product: product))
-                        .toList(),
+                    child: GridView.count(
+                      scrollDirection: Axis.vertical,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 10,
+                      padding: const EdgeInsets.all(20),
+                      crossAxisCount: 2,
+                      childAspectRatio: 1 / 1.8,
+                      children: snapshot.data!
+                          .map((product) => ProductItem(product: product))
+                          .toList(),
+                    ),
                   ),
-                ),
           ),
         ],
       ),

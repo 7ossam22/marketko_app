@@ -16,12 +16,15 @@ class ProductItem extends StatelessWidget {
       },
       child: Flex(
         direction: Axis.vertical,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              product.imageUrl,
-              fit: BoxFit.cover,
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                product.imageUrl,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           Align(

@@ -8,41 +8,38 @@ class CategoryTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-      child: SizedBox(
-        child: Center(
-          child: InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, 'products',arguments: category);
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ClipRRect(
+    return SizedBox(
+      child: Center(
+        child: InkWell(
+          onTap: () {
+            Navigator.pushNamed(context, 'products',arguments: category);
+          },
+          child: Flex(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            direction: Axis.vertical,
+            children: [
+              Expanded(
+                child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
                     category.image,
                     fit: BoxFit.cover,
-                    width: 50,
-                    height: 170,
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Center(
+                child: Text(
+                  category.name,
+                  style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.brown),
                 ),
-                Center(
-                  child: Text(
-                    category.name,
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.brown),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
