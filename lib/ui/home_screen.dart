@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:marketko_app/customwidgets/carouselList_widget.dart';
+import 'package:marketko_app/customwidgets/carouseltemplate_widget.dart';
 import 'package:marketko_app/customwidgets/categoriesTemplate_widget.dart';
 import 'package:marketko_app/view_models/home_viewmodel.dart';
 
-HomeViewModel _viewModel = HomeViewModel();
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late HomeViewModel _viewModel;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
+     _viewModel = HomeViewModel(context: context);
     _viewModel.onGettingCategoryList();
     _viewModel.onGettingCarouselList();
   }
@@ -124,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisCount: 2,
                             children: snapshot.data!
                                 .map((category) => CategoryTemplate(
-                                      category: category,
+                                      category: category,onTap:() => _viewModel.onCategoryItemTap(category),
                                     ))
                                 .toList(),
                           ),

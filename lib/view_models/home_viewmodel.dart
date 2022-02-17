@@ -1,7 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:marketko_app/api/api_implementation.dart';
+import 'package:marketko_app/models/categorymodel.dart';
 import 'package:rxdart/rxdart.dart';
 
 class HomeViewModel {
+  final BuildContext context;
+  HomeViewModel({required this.context});
+
   final ApiImplementation _api = ApiImplementation().Singleton();
   final BehaviorSubject<List> _catList = BehaviorSubject.seeded([]);
   final BehaviorSubject<List> _carouselList = BehaviorSubject.seeded([]);
@@ -16,5 +21,9 @@ class HomeViewModel {
 
   onGettingCarouselList() async {
    _carouselList.add(await _api.getCarouselList());
+  }
+
+  onCategoryItemTap(Category category){
+    Navigator.pushNamed(context, 'products',arguments: category);
   }
 }

@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:marketko_app/models/productmodel.dart';
 
-class ProductItem extends StatelessWidget {
+class ProductTemplate extends StatelessWidget {
+
   final Product product;
 
-  const ProductItem({Key? key, required this.product}) : super(key: key);
+  //this function handle onItemTap;
+  final void Function() onTap;
+
+  const ProductTemplate({Key? key, required this.product, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // ToDo --> implement Navigation to Product_ItemDetail screen,
-        Navigator.pushNamed(context, 'productDetails',arguments: product);
-      },
+      onTap: onTap,
       child: Flex(
         direction: Axis.vertical,
         crossAxisAlignment: CrossAxisAlignment.stretch,

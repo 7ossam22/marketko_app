@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:marketko_app/customwidgets/productItem_widget.dart';
-import 'package:marketko_app/models/categorymodel.dart';
+import 'package:marketko_app/customwidgets/productstemplate_widget.dart';
 import 'package:marketko_app/view_models/productlist_viewmodel.dart';
-
-final ProductScreenViewModel _viewModel = ProductScreenViewModel();
-
-// Searchbar query value
-String query = '';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({Key? key}) : super(key: key);
@@ -17,6 +11,9 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
+  late ProductScreenViewModel _viewModel;
+  String query = '';
+
   @override
   void initState() {
     super.initState();
@@ -24,12 +21,15 @@ class _ProductScreenState extends State<ProductScreen> {
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
-    _viewModel.onGettingProductList();
+    _viewModel = ProductScreenViewModel(context: context);
+    Future.delayed(Duration.zero, () {
+      _viewModel.onViewModelInit();
+      _viewModel.onGettingProductList();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final _args = ModalRoute.of(context)!.settings.arguments as Category;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -39,7 +39,7 @@ class _ProductScreenState extends State<ProductScreen> {
           height: 40,
           child: TextField(
             onChanged: (val) => setState(() {
-              val.isEmpty ? query = _args.name : query = val;
+              query = val;
             }),
             decoration: const InputDecoration(
               alignLabelWithHint: true,
@@ -128,7 +128,10 @@ class _ProductScreenState extends State<ProductScreen> {
                       crossAxisCount: 2,
                       childAspectRatio: 1 / 1.8,
                       children: snapshot.data!
-                          .map((product) => ProductItem(product: product))
+                          .map((product) => ProductTemplate(
+                              product: product,
+                              onTap: () =>
+                                  _viewModel.onProductItemTapped(product)))
                           .toList(),
                     ),
                   ),

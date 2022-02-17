@@ -4,16 +4,19 @@ import 'package:marketko_app/models/categorymodel.dart';
 class CategoryTemplate extends StatelessWidget {
   final Category category;
 
-  const CategoryTemplate({Key? key, required this.category}) : super(key: key);
+  //This function handle onCategoryTap;
+  final void Function() onTap;
+
+  const CategoryTemplate(
+      {Key? key, required this.category, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: Center(
         child: InkWell(
-          onTap: () {
-            Navigator.pushNamed(context, 'products',arguments: category);
-          },
+          onTap: onTap,
           child: Flex(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             direction: Axis.vertical,
