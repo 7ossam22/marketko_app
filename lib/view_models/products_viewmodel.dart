@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:marketko_app/api/api_implementation.dart';
 import 'package:marketko_app/models/categorymodel.dart';
 import 'package:marketko_app/models/productmodel.dart';
@@ -15,11 +16,10 @@ class ProductScreenViewModel {
   final BehaviorSubject<String> _catName = BehaviorSubject.seeded('');
 
   Stream<List> get productList => _productsList;
+
   Stream<String> get catName => _catName;
 
-  onViewModelInit() async {
-    final _args = ModalRoute.of(context)!.settings.arguments as Category;
-    print('this Category is : ${_args.name}');
+  onViewModelInit(Category _args) async {
     _catName.add(_args.name);
   }
 
@@ -29,5 +29,15 @@ class ProductScreenViewModel {
 
   onProductItemTapped(Product product) {
     Navigator.pushNamed(context, 'productDetails', arguments: product);
+  }
+
+  onSortProductsClick() {
+    //ToDo -> Implement sorting function
+    Fluttertoast.showToast(msg: 'Sort clicked');
+  }
+
+  onCartClicked() {
+    //ToDo -> Implement Navigation to Cart screen
+    Fluttertoast.showToast(msg: 'Cart Clicked');
   }
 }

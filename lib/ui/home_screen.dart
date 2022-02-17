@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: true,
         leading: IconButton(
-            onPressed: () {},
+            onPressed: () => _viewModel.onMenuClicked(),
             icon: const Icon(
               Icons.menu,
               color: Colors.brown,
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.brown,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () => _viewModel.onCartClicked(),
           ),
         ],
       ),

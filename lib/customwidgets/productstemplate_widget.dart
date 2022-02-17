@@ -21,14 +21,19 @@ class ProductTemplate extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            child: ClipRRect(
+            child: Material(
+              elevation: 6,
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                product.imageUrl,
-                fit: BoxFit.cover,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  product.imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
+          const SizedBox(height: 10,),
           Align(
             alignment: Alignment.centerLeft,
             child: Text(

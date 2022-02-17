@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:marketko_app/customwidgets/productstemplate_widget.dart';
-import 'package:marketko_app/view_models/productlist_viewmodel.dart';
+import 'package:marketko_app/models/categorymodel.dart';
+import 'package:marketko_app/view_models/products_viewmodel.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({Key? key}) : super(key: key);
@@ -12,6 +13,8 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   late ProductScreenViewModel _viewModel;
+  late Category _args;
+
   String query = '';
 
   @override
@@ -22,10 +25,14 @@ class _ProductScreenState extends State<ProductScreen> {
       DeviceOrientation.portraitUp,
     ]);
     _viewModel = ProductScreenViewModel(context: context);
-    Future.delayed(Duration.zero, () {
-      _viewModel.onViewModelInit();
-      _viewModel.onGettingProductList();
-    });
+    _viewModel.onGettingProductList();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _args = ModalRoute.of(context)!.settings.arguments as Category;
+    _viewModel.onViewModelInit(_args);
   }
 
   @override
@@ -62,9 +69,7 @@ class _ProductScreenState extends State<ProductScreen> {
               size: 30,
               color: Colors.brown,
             ),
-            onPressed: () {
-              //ToDo --> implement navigation to cart screen,
-            },
+            onPressed: () => _viewModel.onCartClicked(),
           ),
         ],
       ),
@@ -86,9 +91,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: TextButton.icon(
-                      onPressed: () {
-                        //ToDo --> implement Sorting menu,
-                      },
+                      onPressed: () => _viewModel.onSortProductsClick(),
                       icon: const Icon(
                         Icons.sort,
                         color: Colors.brown,

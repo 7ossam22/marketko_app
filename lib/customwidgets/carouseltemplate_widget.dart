@@ -10,12 +10,16 @@ class CustomCarouselWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       items: list
-          .map((image) => ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                  image,
-                  fit: BoxFit.cover,
-                  width: 400,
+          .map((image) => Material(
+                elevation: 6,
+                borderRadius: BorderRadius.circular(20),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    image,
+                    fit: BoxFit.cover,
+                    width: 400,
+                  ),
                 ),
               ))
           .toList(),

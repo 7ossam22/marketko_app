@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:marketko_app/models/productmodel.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -24,4 +25,11 @@ class ProductDetailsViewModel {
   onViewModelInit(Product _args) {
     _productDetails.add(_args);
   }
+
+  void onCheckOutItemClicked() {
+    //ToDo -> implement checkout method here,also navigation to cart screen
+    Fluttertoast.showToast(msg: 'Navigate to cart screen');
+  }
+
 }
+

@@ -22,11 +22,15 @@ class CategoryTemplate extends StatelessWidget {
             direction: Axis.vertical,
             children: [
               Expanded(
-                child: ClipRRect(
+                child: Material(
+                  elevation: 6,
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    category.image,
-                    fit: BoxFit.cover,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(
+                      category.image,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

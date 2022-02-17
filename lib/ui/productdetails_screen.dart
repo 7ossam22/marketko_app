@@ -46,7 +46,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         stream: _viewModel.productDetails,
         builder: (context, snapshot) => (snapshot.data != null)
             ? Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
                 child: Flex(
                   direction: Axis.vertical,
                   children: [
@@ -63,7 +63,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       ),
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 40,
                     ),
                     Align(
                       alignment: Alignment.centerLeft,
@@ -115,29 +115,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           decoration: BoxDecoration(
                               color: Colors.brown,
                               borderRadius: BorderRadius.circular(10)),
-                          child: Center(
-                            child: TextButton.icon(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.shopping_bag_outlined,
-                                color: Colors.white,
-                                size: 22,
-                              ),
-                              label: const Text(
-                                'Checkout',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22),
-                              ),
+                          child: TextButton.icon(
+                            onPressed: () {
+                              _viewModel.onCheckOutItemClicked();
+                            },
+                            icon: const Icon(
+                              Icons.shopping_bag_outlined,
+                              color: Colors.white,
+                              size: 22,
+                            ),
+                            label: const Text(
+                              'Checkout',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22),
                             ),
                           ),
                         ),
-                        Text(
-                          '\$${snapshot.data!.price}',
-                          style: const TextStyle(
-                            color: Colors.brown,
-                            fontSize: 27,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          child: Text(
+                            '\$${snapshot.data!.price}',
+                            style: const TextStyle(
+                              color: Colors.brown,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],
