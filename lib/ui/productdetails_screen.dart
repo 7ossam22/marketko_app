@@ -146,9 +146,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ),
                   ],
                 ),
               )

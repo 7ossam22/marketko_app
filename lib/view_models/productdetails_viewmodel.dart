@@ -28,7 +28,7 @@ class ProductDetailsViewModel {
 
   void onCheckOutItemClicked() {
     //ToDo -> implement checkout method here,also navigation to cart screen
-    Fluttertoast.showToast(msg: 'Navigate to cart screen');
+    Navigator.pushNamed(context, 'cart');
   }
 
 }

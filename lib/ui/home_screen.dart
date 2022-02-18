@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:marketko_app/customwidgets/carouseltemplate_widget.dart';
-import 'package:marketko_app/customwidgets/categoriesTemplate_widget.dart';
+import 'package:marketko_app/customwidgets/templates/carouseltemplate_widget.dart';
+import 'package:marketko_app/customwidgets/templates/categoriesTemplate_widget.dart';
 import 'package:marketko_app/view_models/home_viewmodel.dart';
 
 

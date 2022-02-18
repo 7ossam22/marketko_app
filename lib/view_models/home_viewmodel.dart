@@ -37,6 +37,6 @@ class HomeViewModel {
 
   onCartClicked() {
     //ToDo -> Implement Navigation to Cart screen
-    Fluttertoast.showToast(msg: 'Cart Clicked');
+    Navigator.pushNamed(context, 'cart');
   }
 }

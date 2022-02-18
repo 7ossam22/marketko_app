@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:marketko_app/customwidgets/productstemplate_widget.dart';
+import 'package:marketko_app/customwidgets/templates/productstemplate_widget.dart';
 import 'package:marketko_app/models/categorymodel.dart';
 import 'package:marketko_app/view_models/products_viewmodel.dart';
 
