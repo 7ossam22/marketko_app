@@ -193,15 +193,15 @@ class __SigninError_handlerGroupState extends State<_SigninError_handlerGroup> {
 //The main widget is here -->
 
 // ignore: camel_case_types
-class SignIn_Screen extends StatefulWidget {
-  const SignIn_Screen({Key? key}) : super(key: key);
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({Key? key}) : super(key: key);
 
   @override
-  _SignIn_ScreenState createState() => _SignIn_ScreenState();
+  _SignInScreenState createState() => _SignInScreenState();
 }
 
 // ignore: camel_case_types
-class _SignIn_ScreenState extends State<SignIn_Screen> {
+class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     // TODO: implement initState

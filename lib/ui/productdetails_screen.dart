@@ -15,16 +15,20 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _viewModel = ProductDetailsViewModel(context: context);
   }
 
   @override
   void didChangeDependencies() {
-    _args = ModalRoute.of(context)!.settings.arguments as Product;
-    _viewModel.onViewModelInit(_args);
     super.didChangeDependencies();
+    _args = ModalRoute.of(context)!.settings.arguments as Product;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  _viewModel.onScreenDisposed();
   }
 
   @override
@@ -42,10 +46,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
         centerTitle: true,
       ),
-      body: StreamBuilder<Product>(
-        stream: _viewModel.productDetails,
-        builder: (context, snapshot) => (snapshot.data != null)
-            ? Padding(
+      body: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 5),
                 child: Flex(
                   direction: Axis.vertical,
@@ -55,10 +56,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       borderRadius: BorderRadius.circular(10),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          snapshot.data!.imageUrl,
-                          height: 400,
-                          fit: BoxFit.cover,
+                        child: Hero(
+                          tag: '${_args.name}_hero',
+                          child: Image.network(
+                            _args.imageUrl,
+                            height: 400,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -69,7 +73,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       alignment: Alignment.centerLeft,
                       child: FittedBox(
                         child: Text(
-                          snapshot.data!.name,
+                          _args.name,
                           style: const TextStyle(
                             color: Colors.brown,
                             fontWeight: FontWeight.bold,
@@ -83,7 +87,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       height: 10,
                     ),
                     Text(
-                      snapshot.data!.description,
+                      _args.description,
                       style: const TextStyle(
                         color: Colors.brown,
                         fontSize: 18,
@@ -95,7 +99,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Rate ${snapshot.data!.rate}',
+                        'Rate ${_args.rate}',
                         style: const TextStyle(
                           color: Colors.brown,
                           fontSize: 30,
@@ -136,7 +140,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                           child: Text(
-                            '\$${snapshot.data!.price}',
+                            '\$${_args.price}',
                             style: const TextStyle(
                               color: Colors.brown,
                               fontSize: 25,
@@ -149,10 +153,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ],
                 ),
               )
-            : const CircularProgressIndicator(
-                color: Colors.brown,
-              ),
-      ),
     );
   }
 }

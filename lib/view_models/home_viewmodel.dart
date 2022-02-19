@@ -39,4 +39,9 @@ class HomeViewModel {
     //ToDo -> Implement Navigation to Cart screen
     Navigator.pushNamed(context, 'cart');
   }
+
+  onScreenDisposed(){
+    _carouselList.add([]);
+    _carouselList.add([]);
+  }
 }

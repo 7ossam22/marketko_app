@@ -32,9 +32,12 @@ class _ProductScreenState extends State<ProductScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _args = ModalRoute.of(context)!.settings.arguments as Category;
-    _viewModel.onViewModelInit(_args);
   }
-
+@override
+  void dispose() {
+    super.dispose();
+    _viewModel.onScreenDisposed();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

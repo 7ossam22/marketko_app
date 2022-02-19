@@ -12,7 +12,7 @@ void main() {
       initialRoute: '/',
       title: 'Marketko',
       routes: {
-        '/': (context) => const SignIn_Screen(),
+        '/': (context) => const SignInScreen(),
         'home': (context) => const HomeScreen(),
         'products': (context) => const ProductScreen(),
         'productDetails': (context) => const ProductDetailsScreen(),

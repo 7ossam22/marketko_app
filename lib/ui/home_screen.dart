@@ -4,7 +4,6 @@ import 'package:marketko_app/customwidgets/templates/carouseltemplate_widget.dar
 import 'package:marketko_app/customwidgets/templates/categoriesTemplate_widget.dart';
 import 'package:marketko_app/view_models/home_viewmodel.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -17,15 +16,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitDown,
       DeviceOrientation.portraitUp,
     ]);
-     _viewModel = HomeViewModel(context: context);
+    _viewModel = HomeViewModel(context: context);
     _viewModel.onGettingCategoryList();
     _viewModel.onGettingCarouselList();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _viewModel.onScreenDisposed();
   }
 
   @override
@@ -118,14 +122,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: CircularProgressIndicator(),
                           )
                         : GridView.count(
-                      childAspectRatio: 1/1.2,
-                            padding:const EdgeInsets.all(20.0),
+                            childAspectRatio: 1 / 1.2,
+                            padding: const EdgeInsets.all(20.0),
                             mainAxisSpacing: 10,
                             crossAxisSpacing: 20,
                             crossAxisCount: 2,
                             children: snapshot.data!
                                 .map((category) => CategoryTemplate(
-                                      category: category,onTap:() => _viewModel.onCategoryItemTap(category),
+                                      category: category,
+                                      onTap: () => _viewModel
+                                          .onCategoryItemTap(category),
                                     ))
                                 .toList(),
                           ),
