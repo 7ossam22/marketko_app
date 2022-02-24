@@ -91,5 +91,20 @@ class Stubs {
       imageUrl:
       'https://images.unsplash.com/photo-1631176093617-63490a3d785a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80',
     ),
+    Product(
+      id: '5',
+      name: 'Essence keep it perfect! make-up fix. spray',
+      category: 'Makeup',
+      description:
+      'Essence Keep It Perfect Fixing Spray,Type: Makeup Finishing,EAN-13: 4250947564189',
+      price: 168.75,
+      rate: 4.5,
+      seller: 'Amazon.eg',
+      stock: 283,
+      imageUrl:
+      'https://m.media-amazon.com/images/I/61hkmmVTEOL._AC_SL1500_.jpg',
+    )
   ];
+
+
 }

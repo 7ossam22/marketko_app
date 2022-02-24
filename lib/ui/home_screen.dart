@@ -38,10 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: const SizedBox(
+        title: SizedBox(
           height: 40,
           child: TextField(
-            decoration: InputDecoration(
+            onSubmitted: (val) => setState(() {
+              //ToDo -> Implement search function with navigation to products_screen
+              // _viewModel.onSearchingProducts(val);
+            }),
+            decoration: const InputDecoration(
               alignLabelWithHint: true,
               suffixIcon: Icon(Icons.search),
               hintText: 'Search.......',

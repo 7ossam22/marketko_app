@@ -11,12 +11,14 @@ class ProductScreenViewModel {
 
   final ApiImplementation _api = ApiImplementation().Singleton();
 
-  final BehaviorSubject<List> _productsList = BehaviorSubject.seeded([]);
+  final BehaviorSubject<List?> _productsList = BehaviorSubject.seeded(null);
 
-  Stream<List> get productList => _productsList;
+  Stream<List?> get productList => _productsList;
 
-  onGettingProductList() async {
-    _productsList.add(await _api.getProductsList());
+
+  onGettingProductList(String query) async {
+    //ToDo -> Handel query functionality
+    _productsList.add(await _api.getProductsList(query));
   }
 
   onProductItemTapped(Product product) {

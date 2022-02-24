@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:marketko_app/customwidgets/templates/productstemplate_widget.dart';
-import 'package:marketko_app/models/categorymodel.dart';
 import 'package:marketko_app/view_models/products_viewmodel.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -13,7 +12,7 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   late ProductScreenViewModel _viewModel;
-  late Category _args;
+  late String _args;
 
   String query = '';
 
@@ -25,19 +24,22 @@ class _ProductScreenState extends State<ProductScreen> {
       DeviceOrientation.portraitUp,
     ]);
     _viewModel = ProductScreenViewModel(context: context);
-    _viewModel.onGettingProductList();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _args = ModalRoute.of(context)!.settings.arguments as Category;
+    // _args = ModalRoute.of(context)!.settings.arguments as Category;
+    _args = ModalRoute.of(context)!.settings.arguments as String;
+    _viewModel.onGettingProductList(_args);
   }
-@override
+
+  @override
   void dispose() {
     super.dispose();
     _viewModel.onScreenDisposed();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,8 +50,10 @@ class _ProductScreenState extends State<ProductScreen> {
         title: SizedBox(
           height: 40,
           child: TextField(
-            onChanged: (val) => setState(() {
-              query = val;
+            onSubmitted : (val) => setState(() {
+              // ToDo -> Handel searching query
+              _args.isNotEmpty ? query = _args : query = val;
+              _viewModel.onGettingProductList(query);
             }),
             decoration: const InputDecoration(
               alignLabelWithHint: true,
@@ -114,18 +118,38 @@ class _ProductScreenState extends State<ProductScreen> {
           const SizedBox(
             height: 10,
           ),
-          StreamBuilder<List>(
-            stream: _viewModel.productList,
-            builder: (context, snapshot) => (snapshot.data ?? []).isEmpty
-                ? const Center(
-                    child: SizedBox(
+          StreamBuilder<List?>(
+              stream: _viewModel.productList,
+              builder: (context, snapshot) {
+                if (snapshot.data == null) {
+                  return const Center(
+                      child: SizedBox(
                     width: 22,
                     height: 22,
                     child: CircularProgressIndicator(
                       color: Colors.brown,
                     ),
-                  ))
-                : Expanded(
+                  ));
+                } else if ((snapshot.data ?? []).isEmpty) {
+                  return Column(
+                    children: const [
+                      Icon(
+                        Icons.error_outline_sharp,
+                        color: Colors.brown,
+                        size: 40,
+                      ),
+                      Text(
+                        'No products matching',
+                        style: TextStyle(
+                          color: Colors.brown,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Expanded(
                     child: GridView.count(
                       scrollDirection: Axis.vertical,
                       crossAxisSpacing: 20,
@@ -140,8 +164,9 @@ class _ProductScreenState extends State<ProductScreen> {
                                   _viewModel.onProductItemTapped(product)))
                           .toList(),
                     ),
-                  ),
-          ),
+                  );
+                }
+              }),
         ],
       ),
     );

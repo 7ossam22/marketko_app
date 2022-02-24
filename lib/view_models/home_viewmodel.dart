@@ -27,7 +27,7 @@ class HomeViewModel {
   }
 
   onCategoryItemTap(Category category) {
-    Navigator.pushNamed(context, 'products', arguments: category);
+    Navigator.pushNamed(context, 'products', arguments: category.name);
   }
 
   onMenuClicked() {
@@ -40,7 +40,12 @@ class HomeViewModel {
     Navigator.pushNamed(context, 'cart');
   }
 
-  onScreenDisposed(){
+  // onSearchingProducts(String query) async{
+  // ToDo -> Implement search with navigation to products_screen
+  //   Navigator.pushNamed(context, 'products',arguments: query);
+  // }
+
+  onScreenDisposed() {
     _carouselList.add([]);
     _carouselList.add([]);
   }

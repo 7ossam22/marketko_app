@@ -47,15 +47,26 @@ class ApiImplementation extends ApiInterface {
   }
 
   @override
-  Future<Product> getProductItemDetails(String productID) {
-    // TODO: implement getProductItemDetails
-    throw UnimplementedError();
+  Future<List> getProductsList(String query) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    List productsList =
+        stubs.ProductList.where((element) => element.category == query || element.name == query)
+            .toList();
+    return productsList;
   }
 
   @override
-  Future<List> getProductsList() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    List productsList = stubs.ProductList;
-    return productsList;
+  Future<Product> getProductsInCart(String productId) async {
+    //ToDo -> Handel products in cart null checker
+    Product ProductsInCart =
+        stubs.ProductList.where((element) => element.id == productId.trim())
+            .toList() as Product;
+    return ProductsInCart;
+  }
+
+  @override
+  Future<bool> submitPlaceOrder() async {
+    Future.delayed(const Duration(seconds: 3));
+    return true;
   }
 }
