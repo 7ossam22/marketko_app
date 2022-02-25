@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:marketko_app/customwidgets/templates/carouseltemplate_widget.dart';
-import 'package:marketko_app/customwidgets/templates/categoriesTemplate_widget.dart';
+import 'package:marketko_app/components/templates/carousel_template.dart';
+import 'package:marketko_app/components/templates/categories_template.dart';
 import 'package:marketko_app/view_models/home_viewmodel.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +13,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late HomeViewModel _viewModel;
-
+  late String _args;
+  String query = '';
   @override
   void initState() {
     super.initState();
@@ -43,7 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
           child: TextField(
             onSubmitted: (val) => setState(() {
               //ToDo -> Implement search function with navigation to products_screen
-              // _viewModel.onSearchingProducts(val);
+              val.isEmpty? query = _args : query = val;
+              _viewModel.onSearchingProducts(val);
             }),
             decoration: const InputDecoration(
               alignLabelWithHint: true,
@@ -90,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: CircularProgressIndicator(),
                       ),
                     )
-                  : CustomCarouselWidget(list: snapshot.data!)),
+                  : CustomCarousel(list: snapshot.data!)),
           const Padding(
             padding: EdgeInsets.fromLTRB(20, 15, 0, 0),
             child: Text(

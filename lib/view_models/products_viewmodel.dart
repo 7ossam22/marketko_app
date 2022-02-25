@@ -18,6 +18,7 @@ class ProductScreenViewModel {
 
   onGettingProductList(String query) async {
     //ToDo -> Handel query functionality
+    _productsList.add(null);
     _productsList.add(await _api.getProductsList(query));
   }
 

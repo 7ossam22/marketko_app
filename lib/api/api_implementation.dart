@@ -49,9 +49,9 @@ class ApiImplementation extends ApiInterface {
   @override
   Future<List> getProductsList(String query) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    List productsList =
-        stubs.ProductList.where((element) => element.category == query || element.name == query)
-            .toList();
+    List productsList = stubs.ProductList.where((element) =>
+        element.category.contains(query.trim()) ||
+        element.name.contains(query.trim())).toList();
     return productsList;
   }
 

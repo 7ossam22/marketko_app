@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:marketko_app/customwidgets/templates/productstemplate_widget.dart';
+import 'package:marketko_app/components/templates/products_template.dart';
 import 'package:marketko_app/view_models/products_viewmodel.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -29,7 +29,6 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // _args = ModalRoute.of(context)!.settings.arguments as Category;
     _args = ModalRoute.of(context)!.settings.arguments as String;
     _viewModel.onGettingProductList(_args);
   }
@@ -52,7 +51,7 @@ class _ProductScreenState extends State<ProductScreen> {
           child: TextField(
             onSubmitted : (val) => setState(() {
               // ToDo -> Handel searching query
-              _args.isNotEmpty ? query = _args : query = val;
+              val.isEmpty? query = _args : query = val;
               _viewModel.onGettingProductList(query);
             }),
             decoration: const InputDecoration(

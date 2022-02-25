@@ -42,11 +42,15 @@ class HomeViewModel {
 
   // onSearchingProducts(String query) async{
   // ToDo -> Implement search with navigation to products_screen
-  //   Navigator.pushNamed(context, 'products',arguments: query);
+  //
   // }
 
   onScreenDisposed() {
     _carouselList.add([]);
     _carouselList.add([]);
+  }
+
+  void onSearchingProducts(String query) {
+    Navigator.pushNamed(context, 'products',arguments: query);
   }
 }
