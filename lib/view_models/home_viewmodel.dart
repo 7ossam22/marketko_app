@@ -40,11 +40,6 @@ class HomeViewModel {
     Navigator.pushNamed(context, 'cart');
   }
 
-  // onSearchingProducts(String query) async{
-  // ToDo -> Implement search with navigation to products_screen
-  //
-  // }
-
   onScreenDisposed() {
     _carouselList.add([]);
     _carouselList.add([]);
