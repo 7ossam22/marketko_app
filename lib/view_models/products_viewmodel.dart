@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:marketko_app/api/api_implementation.dart';
+import 'package:injector/injector.dart';
+import 'package:marketko_app/api/api_interface.dart';
 import 'package:marketko_app/models/productmodel.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -9,12 +10,11 @@ class ProductScreenViewModel {
 
   ProductScreenViewModel({required this.context});
 
-  final ApiImplementation _api = ApiImplementation().Singleton();
+  final IApi _api = Injector.appInstance.get<IApi>();
 
   final BehaviorSubject<List?> _productsList = BehaviorSubject.seeded(null);
 
   Stream<List?> get productList => _productsList;
-
 
   onGettingProductList(String query) async {
     //ToDo -> Handel query functionality
@@ -37,6 +37,6 @@ class ProductScreenViewModel {
   }
 
   void onScreenDisposed() {
-    _productsList.add([]);
+    _productsList.add(null);
   }
 }

@@ -12,5 +12,6 @@ class ProductDetailsViewModel {
 
   void onScreenDisposed() {
     //ToDo -> Implement Screen dispose handler
+    throw UnimplementedError();
   }
 }
