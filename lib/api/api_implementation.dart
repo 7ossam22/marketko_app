@@ -5,13 +5,8 @@ import 'package:marketko_app/stubs/stub_data.dart';
 
 import 'api_interface.dart';
 
-class ApiImplementation extends ApiInterface {
-  ApiImplementation Singleton() {
-    ApiImplementation? _instance;
-    _instance ??= ApiImplementation();
-    return _instance;
-  }
-
+class ApiStubs extends IApi {
+  
   final Stubs stubs = Stubs();
 
   @override

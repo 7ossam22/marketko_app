@@ -28,7 +28,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   void dispose() {
     super.dispose();
-  _viewModel.onScreenDisposed();
   }
 
   @override

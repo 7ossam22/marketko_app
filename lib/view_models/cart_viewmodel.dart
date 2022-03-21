@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:marketko_app/api/api_implementation.dart';
+import 'package:injector/injector.dart';
+import 'package:marketko_app/api/api_interface.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CartViewModel {
-  final ApiImplementation _api = ApiImplementation().Singleton();
+  final IApi _api = Injector.appInstance.get<IApi>();
   final BuildContext context;
 
   CartViewModel({required this.context});

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:marketko_app/api/api_implementation.dart';
+import 'package:injector/injector.dart';
 import 'package:marketko_app/api/api_interface.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SignInViewModel {
   late String _stateTxt;
-  final ApiImplementation _api = ApiImplementation().Singleton();
+  final IApi _api = Injector.appInstance.get<IApi>();
 
   // ignore: non_constant_identifier_names
   final BehaviorSubject<bool> _progress_listener =
@@ -39,10 +39,10 @@ class SignInViewModel {
   }
 
   void onSignUpClicked() {
-    //ToDo ---> implement navigation to sign up screen
+    //ToDo --> implement navigation to sign up screen
   }
 
   void onForgotPasswordClicked() {
-    //ToDo ---> implement navigation to forgot password screen
+    //ToDo --> implement navigation to forgot password screen
   }
 }
