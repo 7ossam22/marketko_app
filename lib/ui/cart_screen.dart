@@ -1,6 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'package:flutter/material.dart';
+import 'package:marketko_app/models/productmodel.dart';
 import 'package:marketko_app/view_models/cart_viewmodel.dart';
 
 class CartScreen extends StatefulWidget {
@@ -12,11 +13,39 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   late CartViewModel _viewModel;
+  double _subTotal = 0;
+  double _delivery = 0;
+  late Product _args;
+  double _totalPrice = 0;
 
   @override
   void initState() {
     super.initState();
     _viewModel = CartViewModel(context: context);
+
+    _viewModel.productPrice.listen((event) {
+      setState(() {
+        _subTotal = event;
+      });
+    });
+    _viewModel.deliveryPrice.listen((event) {
+      setState(() {
+        _delivery = event;
+      });
+    });
+    _viewModel.totalPrice.listen((event) {
+      setState(() {
+        _totalPrice = event;
+      });
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    _args = ModalRoute.of(context)!.settings.arguments as Product;
+    _viewModel.onViewModelInit(_args);
   }
 
   @override
@@ -93,7 +122,7 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                           ),
                           Text(
-                            '\$75.00',
+                            '\$${_subTotal.toString()}',
                             style: TextStyle(
                               color: Colors.brown[700],
                               fontSize: 15,
@@ -119,7 +148,7 @@ class _CartScreenState extends State<CartScreen> {
                             ),
                           ),
                           Text(
-                            '\$3.50',
+                            '\$${_delivery.toString()}',
                             style: TextStyle(
                               color: Colors.brown[700],
                               fontSize: 15,
@@ -136,8 +165,8 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             'Total',
                             style: TextStyle(
                                 color: Colors.brown,
@@ -145,8 +174,8 @@ class _CartScreenState extends State<CartScreen> {
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            '\$78.50',
-                            style: TextStyle(
+                            '\$${_totalPrice.toString()}',
+                            style: const TextStyle(
                               color: Colors.brown,
                               fontSize: 22,
                               fontWeight: FontWeight.bold,

@@ -120,7 +120,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               borderRadius: BorderRadius.circular(10)),
                           child: TextButton.icon(
                             onPressed: () {
-                              _viewModel.onCheckOutItemClicked();
+                              _viewModel.onCheckOutItemClicked(_args);
                             },
                             icon: const Icon(
                               Icons.shopping_bag_outlined,

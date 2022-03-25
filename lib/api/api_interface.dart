@@ -2,7 +2,6 @@ import 'package:marketko_app/models/productmodel.dart';
 
 enum ApiState { failed, successful, error }
 
-
 abstract class IApi {
   Future<ApiState> signInWithCredentials(String email, String password);
 
@@ -18,5 +17,4 @@ abstract class IApi {
   Future<Product> getProductsInCart(String productId);
 
   Future<bool> submitPlaceOrder();
-
 }
